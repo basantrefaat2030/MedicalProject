@@ -1,0 +1,58 @@
+﻿
+@model IEnumerable<MedicalProject.Infrastructure.ViewModel.BlogTypeVM>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+<!-- Main content -->
+<section class="content">
+
+    <div class="row">
+        <div class="col-12">
+            
+            <div class="card">
+                <a href="/admin/BlogType/Add" class="col-2 btn btn-primary" style="margin-top: 20px;margin-left: 20px;">Add</a>
+
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Blog Type Name</th>
+
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach(var item in Model)
+                            {
+                             <tr>
+                                <td></td>
+                                    <td>@item.BlogTypeName</td>
+                                    <td> <a asp-area="Admin" asp-controller="BlogType" asp-action="Update" asp-route-id="@item.BlogTypeId" asp-area="admin" class="btn btn-outline-info">Edit</a></td>
+                                    <td> <a asp-area="Admin" asp-action="Delete" asp-route-id="@item.BlogTypeId" class="btn btn-outline-danger">Delete</a></td>
+                              </tr>
+                              
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+

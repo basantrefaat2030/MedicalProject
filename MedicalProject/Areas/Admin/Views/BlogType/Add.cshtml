@@ -1,0 +1,67 @@
+﻿@model MedicalProject.Infrastructure.ViewModel.BlogTypeAdd
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <!-- general form elements -->
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">@ViewBag.Title</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        @using (Html.BeginForm("", "", FormMethod.Post, new { @id = "frmAddBlogTy" }))
+        {
+            @Html.HiddenFor(a => a.CreationDate)
+            @Html.HiddenFor(a => a.BlogTypeId)
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Name</label>
+
+                        @Html.TextBoxFor(x => x.BlogTypeName, new { @class = "form-control" })
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <a class="btn btn-primary" onclick="save()">Save</a>
+            </div>
+        }
+    </div>
+    <!-- /.card -->
+</div>
+
+ <script>
+        function save() {
+        debugger;
+        if ($('#frmAddBlogTy').valid()) {
+           if($('BlogTypeId').val() == 0 ){
+            $.post("@Url.Action("Add", "BlogType")", $('#frmAddBlogTy').serialize(), function (res) {
+                if (res == 1) {
+                    alert("Saved Successfully");
+                    location.href = "/Admin/BlogType/Index";
+                }
+
+            });
+           }
+           else
+           {
+              $.post("@Url.Action("Update", "BlogType")", $('#frmAddBlogTy').serialize(), function (res) {
+                if (res == 1) {
+                        alert("Updated Successfully");
+                    location.href = "/Admin/BlogType/Index";
+                }
+
+            });
+           }
+        }
+    }
+</script>
