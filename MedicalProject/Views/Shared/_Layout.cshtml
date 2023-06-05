@@ -57,7 +57,7 @@
                     <a href="/doctor">Doctors</a>
                 </li>
             <li>
-                <a href="03_01_services.html">Services</a>
+                    <a href="/home/Services">Services</a>
                 </li>
                 <li><a href="/Department">Departments</a> </li>
             <li>
@@ -69,7 +69,7 @@
                     <li><a href="06_03_cart.html">Cart</a></li>
                 </ul>
             </li>
-            <li><a href="02_04_contact.html">Contact</a></li>
+                <li><a href="/home/Contact">Contact</a></li>
         </ul>
         <div class="clearfix"></div>
     </div>
@@ -97,34 +97,34 @@
                                         <div class="cssmenu">
                                             <ul>
                                                 <li>
-                                                    <a href="#">Home</a>
+                                                    <a href="/">Home</a>
                                                    
                                                 </li>
 
                                                     <li>
-                                                        <a href='#'>About</a>
+                                                        <a href='/home/About'>About</a>
                                                     </li>
 
                                                     <li>
-                                                        <a href='#'>Doctors</a>
+                                                        <a href='/Doctor'>Doctors</a>
                                                     </li>
 
                                                 <li>
-                                                    <a href="03_01_services.html">Services</a>
+                                                    <a href="/home/Services">Services</a>
                                                 </li>
 
                                                 <li class="has-sub">
-                                                    <a href="#">Departments</a>
+                                                        <a href="/Department">Departments</a>
                                                     
                                                 </li>
 
                                                 <li>
-                                                    <a href='#'>Blog</a>
+                                                        <a href="/Blog">Blog</a>
                                               
                                                 </li>
 
                                                 <li class="has-sub">
-                                                    <a href='#'>shop</a>
+                                                    <a href="/shop">shop</a>
                                                     <ul>
                                                
                                                         <li><a href="06_03_cart.html">Cart</a></li>
@@ -224,8 +224,9 @@
         </header>
 
         <div id="main-content" class="site-main-content">
-
+                <section class="site-content-area">
                 @RenderBody()
+                </section>
         </div>
 
         <footer class="site-footer footer-default">
@@ -257,12 +258,11 @@
                                     <div class="widget-content">
                                         <div class="uni-quick-link">
                                             <ul>
-                                                <li><a href="#"><span>+</span> Home</a></li>
-                                                <li><a href="#"><span>+</span> about</a></li>
-                                                <li><a href="#"><span>+</span> services</a></li>
-                                                <li><a href="#"><span>+</span> timetable</a></li>
-                                                <li><a href="#"><span>+</span> blog</a></li>
-                                                <li><a href="#"><span>+</span> contact</a></li>
+                                                <li><a href="/"><span>+</span> Home</a></li>
+                                                <li><a href="/home/about"><span>+</span> about</a></li>
+                                                <li><a href="/home/services"><span>+</span> services</a></li>
+                                                <li><a href="/home/blog"><span>+</span> blog</a></li>
+                                                <li><a href="/home/Contact"><span>+</span> contact</a></li>
                                             </ul>
                                         </div>
                                     </div>
