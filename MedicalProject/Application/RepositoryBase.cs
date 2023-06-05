@@ -28,17 +28,17 @@ namespace MedicalProject.Application
 
         public T Get(System.Linq.Expressions.Expression<Func<T, bool>> filter)
         {
-            return _dbset.FirstOrDefault(filter);
+            return _dbset.AsNoTracking().FirstOrDefault(filter);
         }
 
-        public IEnumerable<T> GetAll()
+        public IQueryable<T> GetAll()
         {
-            return _dbset.ToList();
+            return _dbset;
         }
 
-        public IEnumerable<T> GetAll(System.Linq.Expressions.Expression<Func<T, bool>> filter)
+        public IQueryable<T> GetAll(System.Linq.Expressions.Expression<Func<T, bool>> filter)
         {
-            return _dbset.Where(filter).ToList();
+            return _dbset.Where(filter);
         }
 
         public void Save()

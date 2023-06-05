@@ -14,9 +14,9 @@ namespace MedicalProject.Application.Interfaces
         void Delete(T entity);
         T Get(Expression<Func<T, bool>> filter);
         // Gets all entities of type T
-        IEnumerable<T> GetAll();
+        IQueryable<T> GetAll();
 
-        IEnumerable<T> GetAll(Expression<Func<T, bool>> filter);
+        IQueryable<T> GetAll(Expression<Func<T, bool>> filter);
 
         void Save();
     }

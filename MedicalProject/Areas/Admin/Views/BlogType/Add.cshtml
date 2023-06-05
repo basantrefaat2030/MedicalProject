@@ -43,7 +43,7 @@
         function save() {
         debugger;
         if ($('#frmAddBlogTy').valid()) {
-           if($('BlogTypeId').val() == 0 ){
+           if($('#BlogTypeId').val() == 0){
             $.post("@Url.Action("Add", "BlogType")", $('#frmAddBlogTy').serialize(), function (res) {
                 if (res == 1) {
                     alert("Saved Successfully");

@@ -20,7 +20,7 @@ namespace MedicalProject.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            var model = _blogTypeServices.GetAll();
+            var model = _blogTypeServices.GetAll(a => a.IsDeleted != true).ToList();
             List<BlogTypeVM>  BlogTypes = _mapper.Map<List<BlogTypeVM>>(model);
             return View(BlogTypes);
         }
@@ -29,6 +29,7 @@ namespace MedicalProject.Areas.Admin.Controllers
         {
             BlogTypeAdd blog = new BlogTypeAdd
             {
+                BlogTypeId = 0,
                 CreationDate = DateTime.Now,
             };
 
@@ -65,14 +66,14 @@ namespace MedicalProject.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(BlogTypeAdd blogType , int id)
+        public IActionResult Update(BlogTypeAdd blogType)
         {
             if (!ModelState.IsValid)
                 return Json(2);
             else
             {
 
-                BlogType model = _blogTypeServices.Get(a => a.BlogTypeId == id);
+                BlogType model = _blogTypeServices.Get(a => a.BlogTypeId == blogType.BlogTypeId);
                 model = _mapper.Map<BlogType>(blogType);
                 _blogTypeServices.Update(model);
                 _blogTypeServices.Save();
