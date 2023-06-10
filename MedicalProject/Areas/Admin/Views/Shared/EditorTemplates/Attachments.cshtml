@@ -1,9 +1,9 @@
 ﻿
 @model int
 
-
-@*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
-@*<link href="~/Content/css/mvcfileupload/blueimp/jquery.fileupload.css" rel="stylesheet" />*@
+@{
+    //int exiention = int.Parse(ViewData["type"].ToString());
+}
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
@@ -57,7 +57,7 @@
 
             var desc = "qqq";
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', '@Url.Action("UploadFile", "Base")');
+            xhr.open('POST', '@Url.Action("UploadFile","Base")');
             xhr.send(formdata);
 
             xhr.onreadystatechange = function (ress) {
@@ -70,7 +70,7 @@
 
 
                             var tr = `<div  id="div_` + res[i].id + `"  ><img src="` + res[i].path + `" style="width:70px;" />
-                <span class="icon-feather-x" style="color:red"   onclick="removeItem(`+ res[i].id + `)" ></span></div>`;
+                             <span style="color:red"   onclick="removeItem(`+ res[i].id + `)" ></span></div>`;
 
                             $('#divAttachments').html("").append(tr);
                             $('#hdfAttachments').val(res[i].id);
@@ -85,16 +85,6 @@
         } else {
             console.log("no files");
         }
-
-    }
-
-
-    function removeItem(id) {
-        $('#div_' + id).remove();
-        $('#hdfAttachments').val("0");
-        $("#upload").val("");
-
-        // make request to delete physical  iamge from server
 
     }
 

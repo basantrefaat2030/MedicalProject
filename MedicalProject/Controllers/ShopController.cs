@@ -8,5 +8,15 @@ namespace MedicalProject.Controllers
         {
             return View();
         }
+
+        public IActionResult ProductDetails()
+        {
+            return View();
+        }
+
+        public IActionResult Cart()
+        {
+            return View();
+        }
     }
 }

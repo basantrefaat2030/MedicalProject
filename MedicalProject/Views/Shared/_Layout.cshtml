@@ -66,7 +66,7 @@
             </li>
             <li class="has-sub"><a href='#'>shop</a>
                 <ul>
-                    <li><a href="06_03_cart.html">Cart</a></li>
+                    <li><a asp-controller="Shop" asp-action="Cart">Cart</a></li>
                 </ul>
             </li>
                 <li><a href="/home/Contact">Contact</a></li>
@@ -110,11 +110,11 @@
                                                     </li>
 
                                                 <li>
-                                                    <a href="/home/Services">Services</a>
+                                                    <a asp-controller="Home" asp-action="Services">Services</a>
                                                 </li>
 
-                                                <li class="has-sub">
-                                                        <a href="/Department">Departments</a>
+                                                <li>
+                                                   <a href="/Department">Departments</a>
                                                     
                                                 </li>
 
@@ -127,7 +127,7 @@
                                                     <a href="/shop">shop</a>
                                                     <ul>
                                                
-                                                        <li><a href="06_03_cart.html">Cart</a></li>
+                                                        <li><a asp-controller="Shop" asp-action="Cart">Cart</a></li>
                                                     
                                                     </ul>
                                                 </li>
@@ -339,7 +339,7 @@
     </div>
 </div>
 
- @await RenderSectionAsync("Scripts", required: false)
+@* @await RenderSectionAsync("Scripts", required: false)*@
 <script src="/plugin/jquery/jquery-2.0.2.min.js"></script>
 <script src="/plugin/jquery-ui/jquery-ui.min.js"></script>
 <script src="/plugin/bootstrap/js/bootstrap.js"></script>

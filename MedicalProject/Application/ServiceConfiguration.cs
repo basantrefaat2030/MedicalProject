@@ -20,6 +20,7 @@ namespace MedicalProject.Application
             services.AddScoped<IDepartmentServices, MedicalProject.Application.Services.DepartmentServices>();
             services.AddScoped<IDepartmentServicesServices, DepartmentServicesServices>();
             services.AddScoped<IServicesServices, ServicesServices>();
+            services.AddScoped<IAttachmentServices, AttachmentServices>();
 
         }
     }

@@ -26,6 +26,7 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="wwwroot\admin\plugins\Now\" />
+    <Folder Include="wwwroot\Attachments\" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,59 @@
+﻿@model int  
+@{
+
+    string ex = ViewData["extention"].ToString();
+}
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+@Html.Hidden("", null, new { @id = "hdfAttachmentId" })
+
+
+<input type="file" accept="image/*" id="uploadFile" onchange="UploadImages()" />
+<div class="file-upload">
+        <label class="file-upload-section">
+            <div id="mainLabel">
+
+                <img class="upload-icon" src="@("/Attachments/" + Model.ToString() + ex)" alt="" style="height: 120px; width: 120px;">
+                <span id="fileName"></span>
+            </div>
+        </label>
+</div>
+
+<script>
+
+    function UploadImages() {
+        debugger;
+
+       // var closeBtn='<button type="button" class="close btn-close" aria-label="Close" onclick="removeItem()"><span aria-hidden="true">&times;</span></button>'
+        var data = new FormData();
+        data.append("formFile", $("#uploadFile")[0].files[0]);
+
+        $.ajax({
+            type: 'post',
+            url: "/Base/UploadFile",
+            data: data,
+            processData: false,
+            contentType: false,
+            success: function (result) {
+                debugger;
+                if (result.status === "success") {
+                    $('#hdfAttachmentId').val(result.id);
+                    var filePath = `${result.src}`;
+                    $('.upload-icon').attr('src', filePath);
+                    /*$('.upload-icon').attr('alt', result.name);*/
+                    $("#fileName").text(result.attachmentsName);
+                 //   $("#mainLabel").prepend(closeBtn);
+                }
+                else {
+                    //alert(result.message);
+                }
+            },
+            error: function (err) { console.log(err); },
+        });
+
+    }
+
+
+</script>

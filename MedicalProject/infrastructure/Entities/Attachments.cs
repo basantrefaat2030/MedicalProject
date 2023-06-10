@@ -4,6 +4,8 @@
     {
         public int AttachmentsId { get; set; }
         public int? TypeId { get; set; }
+
+        public string Extention { get; set; }
         public string Title { get; set; }
     }
 }

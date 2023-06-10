@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using MedicalProject.Infrastructure.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MedicalProject.Infrastructure.Entities
 {

@@ -1,0 +1,109 @@
+﻿@model MedicalProject.infrastructure.ViewModel.DepartmentAddVM
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <!-- general form elements -->
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">@ViewBag.Title</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        @using (Html.BeginForm("", "", FormMethod.Post, new { @id = "frmAddDept", @enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(a => a.CreationDate)
+            @Html.HiddenFor(a => a.DepartmentId)
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Name</label>
+
+                        @Html.TextBoxFor(x => x.DepartmentName, new { @class = "form-control" })
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>Address</label>
+
+                        @Html.TextBoxFor(x => x.Address, new { @class = "form-control" })
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>Email</label>
+                        @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>Phone</label>
+                        @Html.TextBoxFor(x => x.Phone, new { @class = "form-control" })
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+                    <label>Description</label>
+                    @Html.TextAreaFor(x => x.Description, new { @class = "textarea", @cols = "20", @rows = "5" })
+
+                </div>
+
+                <div class="form-group">
+                    <label>Image</label>
+
+                    @Html.Editor("ImageId","Image" , new{ extention = Model.extention})
+
+                </div>
+
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <a class="btn btn-primary" onclick="save()">Save</a>
+            </div>
+        }
+    </div>
+    <!-- /.card -->
+</div>
+
+<script>
+    function save() {
+        debugger;
+
+        if ($('#DepartmentName').val() == '') {
+            alert("Enter DepartmentName")
+            return false;
+        }
+        if ($('#Address').val() == "") {
+            alert("Enter Address")
+            return false;
+        }
+        if ($('#Email').val() == "") {
+            alert("Wnter Email")
+            return false;
+        }
+        if ($('#Phone').val() == "") {
+
+            alert("Enter Phone")
+            return false;
+        }
+
+        if ($('#Description').val() == "") {
+
+            alert("Enter Description")
+            return false;
+        }
+
+        $.post("@Url.Action("Add","Department")", $('#frmAddDept').serialize(), function (res) {
+            if (res == 1) {
+                alert("Department Saved")
+                location.href = "/Admin/Department/Index";
+            }
+        });
+    }
+</script>
+

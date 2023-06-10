@@ -1,4 +1,5 @@
 ﻿using MedicalProject.Infrastructure.Entities;
+using MedicalProject.Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace MedicalProject.Infrastructure.Entities

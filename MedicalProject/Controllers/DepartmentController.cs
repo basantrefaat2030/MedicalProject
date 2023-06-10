@@ -9,6 +9,10 @@ namespace MedicalProject.Controllers
             return View();
         }
 
+        public IActionResult Details()
+        {
+            return View();
+        }
         public IActionResult Appointment()
         {
             return View();
