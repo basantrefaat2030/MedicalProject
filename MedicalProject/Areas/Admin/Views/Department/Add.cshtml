@@ -72,12 +72,36 @@
 
 <script>
     function save() {
-        debugger;
+        Check()
 
-        if ($('#DepartmentName').val() == '') {
+        debugger;
+        if($("#DepartmentId").val() == 0){
+        $.post("@Url.Action("Add","Department")", $('#frmAddDept').serialize(), function (res) {
+            if (res == 1) {
+                alert("Department Saved")
+                location.href = "/Admin/Department/Index";
+            }
+        });
+
+        }else{
+            $.post("@Url.Action("Update", "Department")", $('#frmAddDept').serialize(), function (res) {
+                if (res == 1) {
+                        alert("Updated Successfully");
+                    location.href = "/Admin/Department/Index";
+                }
+
+            });
+        }
+    }
+
+   function Check()
+   {
+       debugger;
+            if ($('#DepartmentName').val() == '') {
             alert("Enter DepartmentName")
             return false;
         }
+   
         if ($('#Address').val() == "") {
             alert("Enter Address")
             return false;
@@ -97,13 +121,6 @@
             alert("Enter Description")
             return false;
         }
-
-        $.post("@Url.Action("Add","Department")", $('#frmAddDept').serialize(), function (res) {
-            if (res == 1) {
-                alert("Department Saved")
-                location.href = "/Admin/Department/Index";
-            }
-        });
-    }
+   }
 </script>
 

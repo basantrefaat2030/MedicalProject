@@ -23,6 +23,7 @@ namespace MedicalProject.Application
 
         public void Delete(T entity)
         {
+           
             _dbset.Remove(entity);
         }
 

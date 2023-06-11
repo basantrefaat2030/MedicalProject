@@ -1,7 +1,6 @@
 ﻿
 using MedicalProject.Application.Interfaces;
 using MedicalProject.Infrastructure.Entities;
-using NuGet.Protocol.Core.Types;
 
 namespace MedicalProject.Application.Services
 {
