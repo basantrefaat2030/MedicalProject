@@ -1,0 +1,52 @@
+﻿@model IEnumerable<DoctorSchedulesVM>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <!-- /.card-header -->
+                <a href="/admin/Doctor/Add" class="col-2 btn btn-primary" style="margin-top: 20px;margin-left: 20px;">Add</a>
+                <div class="card-body">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Day</th>
+                                <th>Start</th>
+                                <th>End</th>
+
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td></td>
+                                    <td>@item.DayId</td>
+                                    <td>@item.StartTime</td>
+                                    <td>@item.EndTime</td>
+                                    <td> <a asp-area="Admin" asp-controller="Doctor" asp-action="Update" asp-route-id="@item.DoctorSchedulesId" class="btn btn-outline-primary">Edit</a></td>
+                                    <td> <a asp-area="Admin" asp-controller="Doctor" asp-action="Delete" asp-route-id="@item.DoctorSchedulesId" class="btn btn-outline-danger">Delete</a></td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->

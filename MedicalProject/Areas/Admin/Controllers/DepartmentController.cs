@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MedicalProject.Application.Services;
-using MedicalProject.infrastructure.ViewModel;
 using MedicalProject.Infrastructure.Entities;
 using MedicalProject.Infrastructure.ViewModel;
 using Microsoft.AspNetCore.Mvc;
@@ -12,11 +11,13 @@ namespace MedicalProject.Areas.Admin.Controllers
     public class DepartmentController : Controller
     {
         private readonly IDepartmentServices _departmentServices;
+        private readonly IAttachmentServices _attachmentServices;
         private readonly IMapper _mapper;
 
-        public DepartmentController(IDepartmentServices departmentServices, IMapper mapper)
+        public DepartmentController(IDepartmentServices departmentServices, IMapper mapper , IAttachmentServices attachmentServices)
         {
             _departmentServices = departmentServices;
+            _attachmentServices = attachmentServices;
             _mapper = mapper;
         }
 
@@ -29,7 +30,7 @@ namespace MedicalProject.Areas.Admin.Controllers
 
         public IActionResult Add() 
         {
-            DepartmentAddVM departmentAddVM = new() { CreationDate = DateTime.Now, ImageId = 0, extention = "" };
+            DepartmentAddVM departmentAddVM = new() { DepartmentId = 0 , CreationDate = DateTime.Now, ImageId = 0, extention = "" };
             ViewBag.Title = "Add Department";
             return View(departmentAddVM);
         }
@@ -56,12 +57,14 @@ namespace MedicalProject.Areas.Admin.Controllers
             {
                 Department model = _departmentServices.Get(a => a.DepartmentId == id);
                 departmentAddVM = _mapper.Map<DepartmentAddVM>(model);
+                departmentAddVM.extention = model.ImageId == 0 ? "" : _attachmentServices.Get(a => a.AttachmentsId == model.ImageId).Extention;
             }
 
             ViewBag.Title = "Edit Department";
             return View("Add", departmentAddVM);
         }
 
+        
         [HttpPost]
         public IActionResult Update(DepartmentAddVM departmentAddVM)
         {
@@ -70,7 +73,7 @@ namespace MedicalProject.Areas.Admin.Controllers
             else
             {
                 Department model = _departmentServices.Get(a => a.DepartmentId == departmentAddVM.DepartmentId);
-                model = _mapper.Map<Department>(model);
+                model = _mapper.Map<Department>(departmentAddVM);
                 _departmentServices.Update(model);
                 _departmentServices.Save();
 

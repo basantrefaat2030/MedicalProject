@@ -1,0 +1,114 @@
+﻿@model BlogAddVM
+
+<div class="col-md-12">
+    <!-- general form elements -->
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">@ViewBag.Title</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        @using (Html.BeginForm("", "", FormMethod.Post, new { @id = "frmAddBlog", @enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(a => a.CreationDate)
+            @Html.HiddenFor(a => a.BlogsId)
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Name</label>
+
+                        @Html.TextBoxFor(x => x.BlogsName, new { @class = "form-control" })
+                    </div>
+
+
+                    <div class="col-md-3">
+
+                        <label>Blog Type</label>
+
+                        @Html.DropDownListFor(x => x.BlogTypeId, Model.BlogTypeList , "Select", new { @class = "form-control" })
+                    </div>
+
+                      <div class="col-md-6">
+                        <label>Short Description</label>
+
+                        @Html.TextBoxFor(x => x.ShortDesc, new { @class = "form-control" })
+                    </div>
+
+
+                </div>
+
+
+                <div class="form-group">
+                    <label>Description</label>
+                    @Html.TextAreaFor(x => x.Descriptions, new { @class = "textarea", @cols = "20", @rows = "5" })
+
+                </div>
+
+                <div class="form-group">
+                    <label>Image</label>
+
+                    @Html.Editor("ImageId","Image" , new{ extention = Model.extention})
+
+                </div>
+
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <a class="btn btn-primary" onclick="save()">Save</a>
+            </div>
+        }
+    </div>
+    <!-- /.card -->
+</div>
+
+<script>
+    function save() {
+        Check()
+        debugger;
+        if ($("#BlogsId").val() == 0) {
+            $.post("@Url.Action("Add","Blog")", $('#frmAddBlog').serialize(), function (res) {
+                if (res == 1) {
+                    alert("Blog Saved")
+                    location.href = "/Admin/Blog/Index";
+                }
+            });
+
+        } else {
+            $.post("@Url.Action("Update", "Blog")", $('#frmAddBlog').serialize(), function (res) {
+                if (res == 1) {
+                    alert("Updated Successfully");
+                    location.href = "/Admin/Blog/Index";
+                }
+
+            });
+        }
+    }
+
+    function Check() {
+        debugger;
+        if ($('#BlogsName').val() == '') {
+            alert("Enter Blog Name")
+            return false;
+        }
+
+        if ($('#BlogTypeId').val() == '') {
+            alert("Select Blog Type")
+            return false;
+        }
+        
+
+        if ($('#ShortDesc').val() == "") {
+
+            alert("Enter a Short Description")
+            return false;
+        }
+
+        if ($('#Description').val() == "") {
+
+            alert("Enter Description")
+            return false;
+        }
+    }
+</script>

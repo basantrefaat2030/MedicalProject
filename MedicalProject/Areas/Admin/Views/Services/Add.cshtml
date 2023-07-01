@@ -1,0 +1,99 @@
+﻿@model ServicesAddVM
+
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-md-12">
+    <!-- general form elements -->
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">@ViewBag.Title</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        @using (Html.BeginForm("", "", FormMethod.Post, new { @id = "frmAddService", @enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(a => a.CreationDate)
+            @Html.HiddenFor(a => a.ServicesId)
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Name</label>
+
+                        @Html.TextBoxFor(x => x.ServicesName, new { @class = "form-control" })
+                    </div>
+
+                </div>
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        @Html.TextAreaFor(x => x.Description, new { @class = "textarea", @cols = "20", @rows = "5" })
+
+                    </div>
+
+                <div class="form-group">
+                    <label>Image</label>
+
+                    @Html.Editor("ImageId","Image" , new{ extention = Model.extention})
+
+                </div>
+
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <a class="btn btn-primary" onclick="save()">Save</a>
+            </div>
+        }
+    </div>
+    <!-- /.card -->
+</div>
+
+
+<script>
+    function save() {
+        debugger;
+        Check()
+
+            if ($('#ServicesId').val() == 0) {
+                $.post("@Url.Action("Add", "Services")", $('#frmAddService').serialize(), function (res) {
+                    if (res == 1) {
+                        alert("Saved Successfully");
+                    location.href = "/Admin/Services/Index";
+                    }
+
+                });
+            }
+            else {
+                $.post("@Url.Action("Update", "Services")", $('#frmAddService').serialize(), function (res) {
+                    if (res == 1) {
+                        alert("Updated Successfully");   
+                         location.href = "/Admin/Services/Index";
+                    }
+
+                });
+            }
+
+           
+
+        
+    }
+
+
+    function Check() {
+        debugger;
+        if ($('#ServicesName').val() == '') {
+            alert("Enter DepartmentName")
+            return false;
+        }
+
+        if ($('#Description').val() == "") {
+
+            alert("Enter Description")
+            return false;
+        }
+    }
+</script>

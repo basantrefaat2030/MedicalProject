@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MedicalProject.Application.Services;
-using MedicalProject.infrastructure.ViewModel;
 using MedicalProject.Infrastructure.Entities;
 using MedicalProject.Infrastructure.ViewModel;
 using Microsoft.AspNetCore.Mvc;
@@ -76,7 +75,7 @@ namespace MedicalProject.Areas.Admin.Controllers
             {
 
                 Category model = _categoryServices.Get(a => a.CategoryId == categoryAddVM.CategoryId);
-                model = _mapper.Map<Category>(model);
+                model = _mapper.Map<Category>(categoryAddVM);
                 _categoryServices.Update(model);
                 _categoryServices.Save();
 

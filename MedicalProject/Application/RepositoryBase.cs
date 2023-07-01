@@ -2,6 +2,7 @@
 using MedicalProject.Application.Interfaces;
 using MedicalProject.Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace MedicalProject.Application
 {
@@ -32,6 +33,11 @@ namespace MedicalProject.Application
             return _dbset.AsNoTracking().FirstOrDefault(filter);
         }
 
+        public T Get(Expression<Func<T, bool>> filter, string include)
+        {
+            return _dbset.AsNoTracking().Include(include).FirstOrDefault(filter);
+        }
+
         public IQueryable<T> GetAll()
         {
             return _dbset;
@@ -40,6 +46,11 @@ namespace MedicalProject.Application
         public IQueryable<T> GetAll(System.Linq.Expressions.Expression<Func<T, bool>> filter)
         {
             return _dbset.Where(filter);
+        }
+
+        public IQueryable<T> GetAll(Expression<Func<T, bool>> filter, string include)
+        {
+            return _dbset.Include(include).Where(filter);
         }
 
         public void Save()

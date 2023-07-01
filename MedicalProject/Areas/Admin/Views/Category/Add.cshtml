@@ -1,4 +1,5 @@
 ﻿@model CategoryAddVM
+
 @{
     ViewData["Title"] = "Add";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -38,31 +39,31 @@
     <!-- /.card -->
 </div>
 
-<script>
-    function save() {
-        debugger;
-        if ($("#frmAddCateg").valid()){
-            if ($("#CategoryId").val() == 0) {
-        $.post("@Url.Action("Add","Category")", $('#frmAddCateg').serialize(), function (res) {
-            if (res == 1) {
-                alert("Department Saved")
-                location.href = "/Admin/Category/Index";
-            }
-         });
-           
-        }else{
 
-                $.post("@Url.Action("Update", "Category")", $('#frmAddCateg').serialize(), function (res) {
+    <script>
+        function save() {
+        debugger;
+        if ($('#frmAddCateg').valid()) {
+            if ($('#CategoryId').val() == 0) {
+                $.post("@Url.Action("Add", "Category")", $('#frmAddCateg').serialize(), function (res) {
                 if (res == 1) {
-                    alert("Updated Successfully");
+                    alert("Saved Successfully");
                         location.href = "/Admin/Category/Index";
                 }
 
             });
+           }
+           else
+           {
+                $.post("@Url.Action("Update", "Category")", $('#frmAddCateg').serialize(), function (res) {
+                if (res == 1) {
+                        alert("Updated Successfully");
+                        location.href = "/Admin/Category/Index";
+                }
 
+            });
+           }
         }
     }
 </script>
-
-
 

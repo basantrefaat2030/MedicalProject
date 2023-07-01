@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MedicalProject.infrastructure.ViewModel
+namespace MedicalProject.Infrastructure.ViewModel
 {
     public class DepartmentAddVM
     {
@@ -14,13 +14,15 @@ namespace MedicalProject.infrastructure.ViewModel
 
         [Required]
         public string? Address { get; set; }
+
+        [EmailAddress(ErrorMessage ="Please Enter a Valid Email")]
         [Required]
         public string? Email { get; set; }
         [Required]
         public string? Phone { get; set; }
         public int? ImageId { get; set; }
 
-        public string extention { get; set; }
+        public string? extention { get; set; }
         public DateTime? CreationDate { get; set; } 
 
     }

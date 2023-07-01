@@ -15,7 +15,7 @@ namespace MedicalProject.Application
             services.AddScoped<IBlogsServices, BlogsServices>();
             services.AddScoped<IBlogTypeServices, BlogTypeServices>();
             services.AddScoped<IDoctorServices, DoctorServices>();
-            services.AddScoped<IDoctorSchedulesServicesServices, DoctorSchedulesServices>();
+            services.AddScoped<IDoctorSchedulesServices, DoctorSchedulesServices>();
             services.AddScoped<IContactUsServices,ContactUsServices>();
             services.AddScoped<IDepartmentServices, MedicalProject.Application.Services.DepartmentServices>();
             services.AddScoped<IDepartmentServicesServices, DepartmentServicesServices>();

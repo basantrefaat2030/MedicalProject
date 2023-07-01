@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<ProductVM>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -10,76 +10,34 @@
         <div class="col-12">
             <div class="card">
                 <!-- /.card-header -->
+                <a href="/admin/Product/Add" class="col-2 btn btn-primary" style="margin-top: 20px;margin-left: 20px;">Add</a>
                 <div class="card-body">
                     <table id="example2" class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>Rendering engine</th>
-                                <th>Browser</th>
-                                <th>Platform(s)</th>
-                                <th>Engine version</th>
-                                <th>CSS grade</th>
-
+                                <th>#</th>
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Category Name</th>
                                 <th></th>
                                 <th></th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <td>Trident</td>
-                                <td>InternetExplorer 4.0</td>
-                                <td>Win 95+</td>
-                                <td> 4</td>
-                                <td>X</td>
-                                <td> <a href=""  class="btn btn-outline-primary">Edit</a></td>
-                                <td> <a href="" class="btn btn-outline-danger">Delete</a></td>
-                            </tr>
-                            <tr>
-                                <td>Gecko</td>
-                                <td>Mozilla 1.8</td>
-                                <td>Win 98+ / OSX.1+</td>
-                                <td>1.8</td>
-                                <td>A</td>
-                                <td> <a href="" class="btn btn-outline-primary">Edit</a></td>
-                                <td> <a href="" class="btn btn-outline-danger">Delete</a></td>
-                            </tr>
-                            <tr>
-                                <td>Gecko</td>
-                                <td>Seamonkey 1.1</td>
-                                <td>Win 98+ / OSX.2+</td>
-                                <td>1.8</td>
-                                <td>A</td>
-                                <td> <a href="" class="btn btn-outline-primary">Edit</a></td>
-                                <td> <a href="" class="btn btn-outline-danger">Delete</a></td>
-                            </tr>
-                            <tr>
-                                <td>Gecko</td>
-                                <td>Epiphany 2.20</td>
-                                <td>Gnome</td>
-                                <td>1.8</td>
-                                <td>A</td>
-                                <td> <a href="" class="btn btn-outline-primary">Edit</a></td>
-                                <td> <a href="" class="btn btn-outline-danger">Delete</a></td>
-                            </tr>
-                            <tr>
-                                <td>Tasman</td>
-                                <td>Internet Explorer 5.1</td>
-                                <td>Mac OS 7.6-9</td>
-                                <td>1</td>
-                                <td>C</td>
-                                <td> <a href="" class="btn btn-outline-primary">Edit</a></td>
-                                <td> <a href="" class="btn btn-outline-danger">Delete</a></td>
-                            </tr>
-                            <tr>
-                                <td>Other browsers</td>
-                                <td>All others</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>U</td>
-                                <td> <a href="" class="btn btn-outline-primary">Edit</a></td>
-                                <td> <a href="" class="btn btn-outline-danger">Delete</a></td>
-                            </tr>
+                            @foreach(var item in Model){
+                                <tr>
+                                    <td></td>
+                                    <td>@item.ProductName</td>
+                                    <td>@item.Price</td>
+                                    <td>@item.Quantity</td>
+                                    <td>@item.CategoryName</td>
+                                    <td> <a asp-area="Admin" asp-controller="Product" asp-action="Update" asp-route-id="@item.ProductId" class="btn btn-outline-primary">Edit</a></td>
+                                    <td> <a asp-area="Admin" asp-controller="Product" asp-action="Delete" asp-route-id="@item.ProductId" class="btn btn-outline-danger">Delete</a></td>
+                                </tr>
+                            }
+
                         </tbody>
                     </table>
                 </div>

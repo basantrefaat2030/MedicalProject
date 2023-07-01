@@ -2,7 +2,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace MedicalProject.infrastructure.ViewModel
+namespace MedicalProject.Infrastructure.ViewModel
 {
     public class CategoryAddVM
     {

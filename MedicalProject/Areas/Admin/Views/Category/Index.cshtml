@@ -28,8 +28,8 @@
                             <tr>
                                 <td></td>
                                 <td>@item.CategoryName</td>
-                                    <td> <a asp-area="Admin" asp-controller="Category" asp-action="Update" class="btn btn-outline-primary">Edit</a></td>
-                                    <td> <a asp-area="Admin" asp-controller="Category" asp-action="Update" class="btn btn-outline-danger">Delete</a></td>
+                                    <td> <a asp-area="Admin" asp-controller="Category" asp-action="Update" asp-route-id="@item.CategoryId" class="btn btn-outline-primary">Edit</a></td>
+                                    <td> <a asp-area="Admin" asp-controller="Category" asp-action="Delete" asp-route-id="@item.CategoryId" class="btn btn-outline-danger">Delete</a></td>
                             </tr>
                             }
                         </tbody>

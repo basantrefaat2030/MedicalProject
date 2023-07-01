@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace MedicalProject.Application.Services
 {
-	public class DoctorSchedulesServices : RepositoryBase<DoctorSchedules> , IDoctorSchedulesServicesServices
+	public class DoctorSchedulesServices : RepositoryBase<DoctorSchedules> , IDoctorSchedulesServices
     {
         public DoctorSchedulesServices(ApplicationDbContext db) : base(db)
         {
@@ -16,7 +16,7 @@ namespace MedicalProject.Application.Services
     }
 
 
-    public interface IDoctorSchedulesServicesServices : IRepository<DoctorSchedules>
+    public interface IDoctorSchedulesServices : IRepository<DoctorSchedules>
     {
 
     }

@@ -1,4 +1,4 @@
-﻿namespace MedicalProject.infrastructure.ViewModel
+﻿namespace MedicalProject.Infrastructure.ViewModel
 {
     public class CategoryVM
     {
