@@ -15,10 +15,8 @@
     @using (Html.BeginForm("", "", FormMethod.Post,
            new { @id = "frmAddFile", @enctype = "multipart/form-data" }))
     {
+        
         <input class="uploadButton-input" type="file" accept="image/*" id="upload"  onchange="uploadFile()" multiple="">
-        @*<label class="uploadButton-button ripple-effect" for="upload">
-           
-        </label>*@
     }
 
     <div class="uploadButton-file-name" id="divAttachments">
@@ -37,7 +35,7 @@
         debugger;
         $('#hdfAttachments').val(@Model);
         if (@Model!= 0) {
-            var tr = `<div  id="div_@Model"  >
+            var tr = `<div  id="div_@Model">
             <img src="/Attachments/@string.Concat(Model.ToString(), ".jpg")" style="width:70px;" />
             
                 <a class="icon-feather-x" style="color:red"   onclick="removeItem(@Model)" ></a></div>`;

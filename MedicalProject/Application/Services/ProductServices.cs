@@ -13,9 +13,14 @@ namespace ApplicationWithCodeFirst.Application.Services
         {
 
         }
+
+        public int ProductCount()
+        {
+           return _dbset.Count();
+        }
     }
 	public interface IProductServices : IRepository<Product>
 	{
-
+        int ProductCount();
 	}
 }

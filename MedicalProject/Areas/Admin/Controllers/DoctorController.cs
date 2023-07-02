@@ -67,8 +67,7 @@ namespace MedicalProject.Areas.Admin.Controllers
                 return Json(2);
             else
             {
-                Doctor model = _doctorServices.Get(a => a.DoctorId == doctorvm.DoctorId);
-                model = _mapper.Map<Doctor>(doctorvm);
+                 Doctor model = _mapper.Map<Doctor>(doctorvm);
                 _doctorServices.Add(model);
                 _doctorServices.Save();
 
@@ -87,7 +86,7 @@ namespace MedicalProject.Areas.Admin.Controllers
                 doctor.Departmentlist = new SelectList(_departmentServices.GetAll(a => a.IsDeleted != true),"DepartmentId", "DepartmentName");
             }
 
-            ViewBag.Title = "Edit ";
+            ViewBag.Title = "Edit Doctor";
             return View("Add", doctor);
         }
 
@@ -124,8 +123,87 @@ namespace MedicalProject.Areas.Admin.Controllers
         public IActionResult ShowSchedule(int id)
         {
             var model = _doctorSchedulesServices.GetAll(a => a.IsDeleted != true && a.DoctorId == id).ToList();
-            List<DoctorSchedulesVM> doctorSchedulesVM = _mapper.Map<List<DoctorSchedulesVM>>(model);
+            DoctorSchedulesVM doctorSchedulesVM = new();
+            doctorSchedulesVM.SchedulesList = _mapper.Map<List<ScheduleVm>>(model);
+            doctorSchedulesVM.DoctorId = id;
             return View(doctorSchedulesVM);
+        }
+
+        public IActionResult AddSchedule(int docId)
+        {
+            DoctorScheduleAddVM doctorSchedule = new()
+            {
+                DoctorSchedulesId = 0,
+                CreationDate = DateTime.Now,
+                DoctorId = docId
+            };
+             ViewBag.Title = "Add";
+
+            return View(doctorSchedule);
+
+        }
+        [HttpPost]
+        public IActionResult AddSchedule(DoctorScheduleAddVM doctorSchedule)
+        {
+            if (!ModelState.IsValid)
+                return Json(2);
+            else
+            {
+                if (_doctorSchedulesServices.CheckByDay(doctorSchedule.DayId ,doctorSchedule.DoctorId) == null)
+                {
+                    DoctorSchedules model = _mapper.Map<DoctorSchedules>(doctorSchedule);
+
+                    _doctorSchedulesServices.Add(model);
+                    _doctorSchedulesServices.Save();
+                }else
+                    return Json(-1);
+
+            }
+            return Json(1);
+        }
+
+        public IActionResult UpdateSchedule(int id)
+        {
+            DoctorScheduleAddVM schedule = new();
+            if (id != 0)
+            {
+                DoctorSchedules model = _doctorSchedulesServices.Get(a => a.DoctorSchedulesId == id);
+                schedule = _mapper.Map<DoctorScheduleAddVM>(model);
+            }
+
+            ViewBag.Title = "Edit";
+            return View("AddSchedule", schedule);
+        }
+        [HttpPost]
+        public IActionResult UpdateSchedule(DoctorScheduleAddVM doctorScheduleAddVM)
+        {
+            if (!ModelState.IsValid)
+                return Json(2);
+            else
+            {
+                DoctorSchedules model = _doctorSchedulesServices.Get(a => a.DoctorSchedulesId == doctorScheduleAddVM.DoctorSchedulesId);
+                if (_doctorSchedulesServices.CheckByDay(doctorScheduleAddVM.DayId , doctorScheduleAddVM.DoctorId) == null)
+                {
+
+                    model = _mapper.Map<DoctorSchedules>(doctorScheduleAddVM);
+                    _doctorSchedulesServices.Update(model);
+                    _doctorSchedulesServices.Save();
+                }
+                else
+                    return Json(-1);
+
+            }
+            return Json(1);
+        }
+
+        public IActionResult ScheduleDelete(int id)
+        {
+            DoctorSchedules model = _doctorSchedulesServices.Get(a => a.DoctorSchedulesId == id);
+            model.IsDeleted = true;
+            _doctorSchedulesServices.Update(model);
+            _doctorSchedulesServices.Save();
+
+            return RedirectToAction("ShowSchedule", new { id = model.DoctorId });
         }
 
     }

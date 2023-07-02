@@ -37,6 +37,8 @@ namespace MedicalProject.Mapper
 
             //doctor schedule
             this.CreateMap<DoctorSchedulesVM, DoctorSchedules>().ReverseMap();
+            this.CreateMap<DoctorScheduleAddVM, DoctorSchedules>().ReverseMap();
+            this.CreateMap<ScheduleVm, DoctorSchedules>().ReverseMap();
 
 
         }

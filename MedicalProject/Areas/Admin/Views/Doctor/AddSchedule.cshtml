@@ -1,0 +1,86 @@
+﻿@using MedicalProject.Infrastructure.Entities;
+@model DoctorScheduleAddVM
+
+<div class="col-md-12">
+    <!-- general form elements -->
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">@ViewBag.Title</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        @using (Html.BeginForm("", "", FormMethod.Post, new { @id = "frmAdd"}))
+        {
+            @Html.HiddenFor(a => a.CreationDate)
+            @Html.HiddenFor(a => a.DoctorSchedulesId)
+            @Html.HiddenFor(a => a.DoctorId)
+
+            <div class="card-body">
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <label>Day</label>
+                        <select class="form-control" asp-for="DayId" asp-items="@Html.GetEnumSelectList(typeof(WeekDays))" ></select>
+
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Start Time</label>
+
+                        @Html.TextBoxFor(x => x.StartTime, new { @class = "form-control" , @type ="time" })
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>End Time</label>
+
+                        @Html.TextBoxFor(x => x.EndTime, new { @class = "form-control" , @type ="time" })
+                    </div>
+
+
+                </div>
+
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <a class="btn btn-primary" onclick="save()">Save</a>
+            </div>
+        }
+    </div>
+    <!-- /.card -->
+</div>
+
+
+<script>
+    function save() {
+        debugger;
+        
+        if ($("#DoctorSchedulesId").val() == 0) {
+            $.post("@Url.Action("AddSchedule","Doctor")", $('#frmAdd').serialize(), function (res) {
+                if (res == 1) {
+                    alert("Saved")
+                    location.href = "/Admin/Doctor/ShowSchedule?id=" + $("#DoctorId").val();
+                }
+                else if(res == -1){
+                    alert("This day was entered on this Schedule !")
+                }
+            });
+
+        } else {
+
+            $.post("@Url.Action("UpdateSchedule", "Doctor")", $('#frmAdd').serialize(), function (res) {
+                if (res == 1) {
+                    alert("Updated Successfully");
+                    location.href = "/Admin/Doctor/ShowSchedule?id=" + $("#DoctorId").val();
+                }
+                 else if(res == -1){
+                    alert("This day was entered on this Schedule !")
+                }
+
+            });
+        }
+
+    }
+
+    </script>

@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
-namespace MedicalProject.infrastructure.ViewModel
+namespace MedicalProject.Infrastructure.ViewModel
 {
-    public class DoctorScheduleAdd
+    public class DoctorScheduleAddVM
     {
         public int DoctorSchedulesId { get; set; }
 

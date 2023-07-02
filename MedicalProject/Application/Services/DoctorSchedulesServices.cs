@@ -13,12 +13,16 @@ namespace MedicalProject.Application.Services
 
         }
 
+        public DoctorSchedules CheckByDay(WeekDays dayId , int docId)
+        {
+            return _dbset.FirstOrDefault(a => a.DayId == dayId && a.IsDeleted != true && a.DoctorId == docId);
+        }
     }
 
 
     public interface IDoctorSchedulesServices : IRepository<DoctorSchedules>
     {
-
+        DoctorSchedules CheckByDay(WeekDays dayId , int docId);
     }
 
 }

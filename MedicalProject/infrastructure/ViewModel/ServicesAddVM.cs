@@ -7,7 +7,6 @@ namespace MedicalProject.Infrastructure.ViewModel
         public int ServicesId { get; set; }
         [Required]
         public string ServicesName { get; set; }
-        [Required]
         public string Description { get; set; }
 
         public int? ImageId { get; set; }

@@ -1,4 +1,5 @@
-﻿
+﻿@model HomeVM
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -30,7 +31,7 @@
         <!-- small box -->
         <div class="small-box bg-info">
             <div class="inner">
-                <h3>150</h3>
+                <h3>@Model.DoctorCount</h3>
 
                 <p>Doctors</p>
             </div>
@@ -46,7 +47,7 @@
         <!-- small box -->
         <div class="small-box bg-success">
             <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3>@Model.DepartmentCount<sup style="font-size: 20px"></sup></h3>
 
                 <p>Departments</p>
             </div>
@@ -61,7 +62,7 @@
         <!-- small box -->
         <div class="small-box bg-warning">
             <div class="inner">
-                <h3>44</h3>
+                <h3>@Model.CategoryCount</h3>
 
                 <p>Categories</p>
             </div>
@@ -77,7 +78,7 @@
         <!-- small box -->
         <div class="small-box bg-danger">
             <div class="inner">
-                <h3>65</h3>
+                <h3>@Model.ProductCount</h3>
 
                 <p>Products</p>
             </div>

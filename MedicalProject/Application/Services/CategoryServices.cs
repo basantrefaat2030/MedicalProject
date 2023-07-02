@@ -13,10 +13,14 @@ namespace MedicalProject.Application.Services
 
         }
 
+        public int CategoryCount()
+        {
+            return _dbset.Count();
+        }
     }
 
 	public interface ICategoryServices :IRepository<Category>
 	{
-        
+        int CategoryCount();
 	}
 }

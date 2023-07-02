@@ -9,10 +9,15 @@ namespace MedicalProject.Application.Services
         public DoctorServices(ApplicationDbContext db) : base(db)
         {
         }
+
+        public int DoctorCount()
+        {
+            return _dbset.Count();
+        }
     }
 
     public interface IDoctorServices : IRepository<Doctor>
     {
-
+        int DoctorCount();
     }
 }
